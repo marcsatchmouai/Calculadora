@@ -91,28 +91,22 @@ const operatorFunction = function () {
 
 const resultFunction = function (event) {
   secondValue = parseFloat(display.innerText)
-  let result
-  switch (selectedOperator) {
-    case '*':
-      result = firstValue * secondValue
-      break
-    case '+':
-      result = firstValue + secondValue
-      break
-    case '-':
-      result = firstValue - secondValue
-      break
-    case '/':
-      result = firstValue / secondValue
-      break
-    case 'M+':
-    case 'M-':
-      result = mem
-      break
-    default:
-      break  
+
+  const options = {
+    baseURL: "http://localhost:3000/",
+    timeout: 5000,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
   }
-  display.innerText = result
+  fetch(`http://localhost:3000/getresult/${firstValue}/${secondValue}/${selectedOperator}`, options)
+  .then(res => res.json())
+  .then((response) => {
+    console.log(response)
+    display.innerText = response.result
+  })
+  
 }
 
 
