@@ -100,13 +100,40 @@ const resultFunction = function (event) {
       "Content-Type": "application/json"
     }
   }
-  fetch(`http://localhost:3000/getresult/${firstValue}/${secondValue}/${selectedOperator}`, options)
-  .then(res => res.json())
-  .then((response) => {
-    console.log(response)
-    display.innerText = response.result
-  })
-  
+  switch (selectedOperator) {
+    case '+':
+      fetch(`http://localhost:3000/getsuma/${firstValue}/${secondValue}`, options)
+      .then(res => res.json())
+      .then((response) => {
+        console.log(response)
+        display.innerText = response.result
+      })
+      break
+    case '-':
+      fetch(`http://localhost:3000/getresta/${firstValue}/${secondValue}`, options)
+      .then(res => res.json())
+      .then((response) => {
+        console.log(response)
+        display.innerText = response.result
+      })
+      break
+    case '*':
+      fetch(`http://localhost:3000/getmulti/${firstValue}/${secondValue}`, options)
+      .then(res => res.json())
+      .then((response) => {
+        console.log(response)
+        display.innerText = response.result
+      })
+      break
+    case '/':
+      fetch(`http://localhost:3000/getdiv/${firstValue}/${secondValue}`, options)
+      .then(res => res.json())
+      .then((response) => {
+        console.log(response)
+        display.innerText = response.result
+      })
+      break
+    }
 }
 
 
